@@ -28,7 +28,6 @@ export default {
       },
       body: JSON.stringify(body),
     }).then(processFetch)
-    .catch(e => console.log(e))
   ),
   delete: (url, body = {}) => (
     fetch(`${baseURL}${url}`, {

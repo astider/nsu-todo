@@ -66,7 +66,6 @@ const MainTodo = (props) => {
   const createTodo = async () => {
     try {
       const { title, description } = targetTodo;
-      console.log('create', title, description);
       await api.post('todos/', {
         title,
         description
@@ -81,7 +80,6 @@ const MainTodo = (props) => {
   const editTodo = async (title, description) => {
     try {
       const { _id, title, description } = targetTodo;
-      console.log('edit', title, description);
       await api.put(`todos/${_id}`, {
         title,
         description

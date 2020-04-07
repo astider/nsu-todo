@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import styled from 'styled-components';
 
 import LoginForm from './components/LoginForm';
@@ -34,13 +34,15 @@ const Header = styled.h1`
 
 
 function App() {
+  const [, setReload] = useState(false);
   const user = getUserData();
+
   if (!user) {
     return (
       <MainContainer>
         <InnerContainer>
           <Header>Log in</Header>
-          <LoginForm />
+          <LoginForm setReload={setReload} />
         </InnerContainer>
       </MainContainer>
     );

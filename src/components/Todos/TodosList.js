@@ -49,7 +49,6 @@ const TodoList = ({ todoData, editTodo, deleteTodo }) => {
 
   const confirmDelete = (id) => {
     const target = todoData.find(t => t._id === id);
-    console.log('set target', id);
     setTarget(target);
     setShowConfirm(true);
   };

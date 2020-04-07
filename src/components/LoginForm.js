@@ -34,23 +34,27 @@ const LoginForm = (props) => {
   const [errorText, setErrorText] = useState('');
 
   const onSubmit = async () => {
-    const trimUsername = username.trim();
-    const trimPassword = password.trim();
-    if (!trimUsername || !trimPassword) {
-      setErrorText('Username or Password cannot be empty');
-      return;
-    }
-    const data = await api.post('users/auth', {
-      "username": trimUsername, 
-      "password": trimPassword
-    }, false);
-    if (data) {
-      const { token } = data.data;
-      if (window) {
-        window.localStorage.setItem('access-token', token);
+    try {
+      const trimUsername = username.trim();
+      const trimPassword = password.trim();
+      if (!trimUsername || !trimPassword) {
+        setErrorText('Username or Password cannot be empty');
+        return;
       }
+      const data = await api.post('users/auth', {
+        "username": trimUsername, 
+        "password": trimPassword
+      }, false);
+      if (data) {
+        const { token } = data.data;
+        if (window) {
+          window.localStorage.setItem('access-token', token);
+          props.setReload(true);
+        }
+      }
+    } catch (e) {
+      setErrorText(e.message);
     }
-    console.log(trimUsername, trimPassword, data);
   }
 
   return (
